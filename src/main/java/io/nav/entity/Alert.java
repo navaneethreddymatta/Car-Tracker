@@ -2,17 +2,24 @@ package io.nav.entity;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.util.UUID;
 
 /**
  * Created by navanee on 24-06-2017.
  */
 
-@Component
+@Entity
 public class Alert {
 
+    @Id
+    @Column(columnDefinition = "VARCHAR(36)")
     private String id;
+
+    @OneToOne
     private Reading reading;
+
+    @ManyToOne
     private AlertType type;
 
     public Alert() {
@@ -41,5 +48,14 @@ public class Alert {
 
     public void setType(AlertType type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "Alert{" +
+                "id='" + id + '\'' +
+                ", reading=" + reading +
+                ", type=" + type +
+                '}';
     }
 }

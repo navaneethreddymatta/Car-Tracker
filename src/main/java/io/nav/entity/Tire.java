@@ -1,13 +1,21 @@
 package io.nav.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.UUID;
 
 /**
  * Created by navanee on 24-06-2017.
  */
+
+@Entity
 public class Tire {
 
+    @Id
+    @Column(columnDefinition = "VARCHAR(36)")
     private String id;
+
     private int frontLeft;
     private int frontRight;
     private int rearLeft;
@@ -55,5 +63,16 @@ public class Tire {
 
     public void setRearRight(int rearRight) {
         this.rearRight = rearRight;
+    }
+
+    @Override
+    public String toString() {
+        return "Tire{" +
+                "id='" + id + '\'' +
+                ", frontLeft=" + frontLeft +
+                ", frontRight=" + frontRight +
+                ", rearLeft=" + rearLeft +
+                ", rearRight=" + rearRight +
+                '}';
     }
 }

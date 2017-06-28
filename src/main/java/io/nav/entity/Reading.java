@@ -1,7 +1,6 @@
 package io.nav.entity;
 
-import org.springframework.stereotype.Component;
-
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
@@ -9,14 +8,23 @@ import java.util.UUID;
  * Created by navanee on 24-06-2017.
  */
 
-@Component
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "Reading.getAll",
+                query = "SELECT reading FROM Reading reading"),
+        @NamedQuery(name = "Reading.getReadingsByVin",
+                query = "SELECT reading FROM Reading reading WHERE vin=:paramsVIN")
+})
 public class Reading {
 
+    @Id
+    @Column(columnDefinition = "VARCHAR(36)")
     private String id;
+
     private String vin;
     private double latitude;
     private double longitude;
-    private Date timeStamp;
+    private Date timestamp;
     private float fuelVolume;
     private int speed;
     private int engineHp;
@@ -24,6 +32,8 @@ public class Reading {
     private boolean engineCoolantLow;
     private boolean cruiseControlOn;
     private int engineRpm;
+
+    @OneToOne
     private Tire tires;
 
     public Reading() {
@@ -63,11 +73,11 @@ public class Reading {
     }
 
     public Date getTimeStamp() {
-        return timeStamp;
+        return timestamp;
     }
 
-    public void setTimeStamp(Date timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setTimeStamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 
     public float getFuelVolume() {
@@ -132,5 +142,24 @@ public class Reading {
 
     public void setTires(Tire tires) {
         this.tires = tires;
+    }
+
+    @Override
+    public String toString() {
+        return "Reading{" +
+                "id='" + id + '\'' +
+                ", vin='" + vin + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", timeStamp=" + timestamp +
+                ", fuelVolume=" + fuelVolume +
+                ", speed=" + speed +
+                ", engineHp=" + engineHp +
+                ", checkEngineLightOn=" + checkEngineLightOn +
+                ", engineCoolantLow=" + engineCoolantLow +
+                ", cruiseControlOn=" + cruiseControlOn +
+                ", engineRpm=" + engineRpm +
+                ", tires=" + tires +
+                '}';
     }
 }

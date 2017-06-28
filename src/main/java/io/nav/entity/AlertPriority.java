@@ -2,21 +2,23 @@ package io.nav.entity;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.UUID;
 
 /**
  * Created by navanee on 24-06-2017.
  */
 
-@Component
-public class Priority {
+@Entity
+public class AlertPriority {
 
+    @Id
+    @Column(columnDefinition = "VARCHAR(36)")
     private String id;
-    private String name;
 
-    public Priority() {
-        this.id = UUID.randomUUID().toString();
-    }
+    private String name;
 
     public String getId() {
         return id;
@@ -32,5 +34,13 @@ public class Priority {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "AlertPriority{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

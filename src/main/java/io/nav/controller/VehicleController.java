@@ -1,11 +1,11 @@
 package io.nav.controller;
 
-import io.nav.entity.Reading;
 import io.nav.entity.Vehicle;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import io.nav.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by navanee on 24-06-2017.
@@ -15,16 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/vehicles")
 public class VehicleController {
 
+    @Autowired
+    VehicleService vehicleService;
+
     @RequestMapping(method = RequestMethod.GET)
-    public void getVehicle() {
-        System.out.println("###########");
-        System.out.println("get vehicles");
+    public List<Vehicle> getVehicles() {
+        return vehicleService.getVehicles();
     }
 
+    @CrossOrigin(origins = "http://mocker.egen.io")
     @RequestMapping(method = RequestMethod.PUT)
     public void updateVehicle(@RequestBody Vehicle[] vehicles) {
-        System.out.println("###########");
-        System.out.println(vehicles);
+        vehicleService.loadVehicles(vehicles);
     }
 
 }

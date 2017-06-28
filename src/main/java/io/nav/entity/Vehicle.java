@@ -1,17 +1,23 @@
 package io.nav.entity;
 
-import org.springframework.stereotype.Component;
-
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by navanee on 24-06-2017.
  */
 
-@Component
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "Vehicle.getAll",
+                    query = "SELECT veh FROM Vehicle veh")
+})
 public class Vehicle {
 
+    @Id
+    @Column(columnDefinition = "VARCHAR(36)")
     private String vin;
+
     private String make;
     private String model;
     private int year ;
@@ -73,5 +79,18 @@ public class Vehicle {
 
     public void setLastServiceDate(Date lastServiceDate) {
         this.lastServiceDate = lastServiceDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "vin='" + vin + '\'' +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", year=" + year +
+                ", redLineRpm=" + redLineRpm +
+                ", maxFuelVolume=" + maxFuelVolume +
+                ", lastServiceDate=" + lastServiceDate +
+                "}";
     }
 }
