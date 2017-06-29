@@ -26,6 +26,9 @@ public class VehicleController {
     @CrossOrigin(origins = "http://mocker.egen.io")
     @RequestMapping(method = RequestMethod.PUT)
     public void updateVehicle(@RequestBody Vehicle[] vehicles) {
+        for(Vehicle v : vehicles) {
+            System.out.println(v.toString());
+        }
         vehicleService.loadVehicles(vehicles);
     }
 

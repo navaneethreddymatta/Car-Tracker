@@ -40,16 +40,16 @@ public class ReadingServiceImpl implements ReadingService {
         Vehicle vehicle =  vehicleService.getVehicle(reading.getVin());
         if(vehicle != null) {
             if (reading.getEngineRpm() > vehicle.getRedLineRpm()) {
-                createAlert("at-01", reading);
+                createAlert("at-01", reading, vehicle);
             }
             if (reading.getFuelVolume() < (0.1 * vehicle.getMaxFuelVolume())) {
-                createAlert("at-02", reading);
+                createAlert("at-02", reading, vehicle);
             }
             if (getLeastTirePressure(reading.getTires()) < 32 || getMaxTirePressure(reading.getTires()) > 36) {
-                createAlert("at-03", reading);
+                createAlert("at-03", reading, vehicle);
             }
             if (reading.isEngineCoolantLow() || reading.isCheckEngineLightOn()) {
-                createAlert("at-04", reading);
+                createAlert("at-04", reading, vehicle);
             }
         }
         return reading;
@@ -81,9 +81,10 @@ public class ReadingServiceImpl implements ReadingService {
         return maxValue;
     }
 
-    public void createAlert(String alertTypeId, Reading reading) {
+    public void createAlert(String alertTypeId, Reading reading, Vehicle vehicle) {
         Alert alert = new Alert();
         alert.setReading(reading);
+        alert.setVehicle(vehicle);
         AlertType alertType = (alertTypeService.getAlertType(alertTypeId));
         alert.setType(alertType);
         alertTypeService.createAlert(alert);

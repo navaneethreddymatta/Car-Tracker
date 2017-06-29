@@ -38,12 +38,10 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     public Vehicle updateVehicle(Vehicle vehicle) {
-        // System.out.println("Service - Update vehicle: " + vehicle.getVin());
         return vehicleRepository.updateVehicle(vehicle);
     }
 
     public void createVehicle(Vehicle vehicle) {
-        // System.out.println("Service - Create vehicle: " + vehicle.getVin());
         vehicleRepository.createVehicle(vehicle);
     }
 }

@@ -1,7 +1,5 @@
 package io.nav.entity;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -18,6 +16,9 @@ public class Alert {
 
     @OneToOne
     private Reading reading;
+
+    @ManyToOne
+    private Vehicle vehicle;
 
     @ManyToOne
     private AlertType type;
@@ -50,11 +51,20 @@ public class Alert {
         this.type = type;
     }
 
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
     @Override
     public String toString() {
         return "Alert{" +
                 "id='" + id + '\'' +
                 ", reading=" + reading +
+                ", vehicle=" + vehicle +
                 ", type=" + type +
                 '}';
     }

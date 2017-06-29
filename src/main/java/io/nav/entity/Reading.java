@@ -1,22 +1,18 @@
 package io.nav.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by navanee on 24-06-2017.
+ * Created by navanee on 29-06-2017.
  */
 
 @Entity
-@NamedQueries({
-        @NamedQuery(name = "Reading.getAll",
-                query = "SELECT reading FROM Reading reading"),
-        @NamedQuery(name = "Reading.getReadingsByVin",
-                query = "SELECT reading FROM Reading reading WHERE vin=:paramsVIN")
-})
 public class Reading {
-
     @Id
     @Column(columnDefinition = "VARCHAR(36)")
     private String id;
@@ -72,11 +68,11 @@ public class Reading {
         this.longitude = longitude;
     }
 
-    public Date getTimeStamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimeStamp(Date timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -151,7 +147,7 @@ public class Reading {
                 ", vin='" + vin + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", timeStamp=" + timestamp +
+                ", timestamp=" + timestamp +
                 ", fuelVolume=" + fuelVolume +
                 ", speed=" + speed +
                 ", engineHp=" + engineHp +

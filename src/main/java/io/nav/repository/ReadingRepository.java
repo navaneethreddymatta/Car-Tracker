@@ -1,7 +1,7 @@
 package io.nav.repository;
 
-import io.nav.entity.Reading;
 
+import io.nav.entity.Reading;
 import java.util.List;
 
 /**
